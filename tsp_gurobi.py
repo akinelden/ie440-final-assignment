@@ -1,5 +1,5 @@
-# It's solved with Gurobi 8.0.1 in Python 2.7
-# that's why it's in a different source file
+# Solved with Gurobi 8.0.1
+# Requires Python 2.7
 
 import math
 import csv
@@ -52,19 +52,21 @@ def writePairsSolution(pairs, filename = 'solver_solution.csv'):
             writer.writerow(p)
 
 
-
+# Data read operation
 tsp_patterns = []
 with open('IE440Final19ETSPData.txt', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     for row in csv_reader:
         tsp_patterns.append([float(row["x"]),float(row["y"])])
 
+# Cost calculation
 c = {}
 
 for i in range(81):
     for j in range(81):
         c[i,j] = euclideanDistance(tsp_patterns[i],tsp_patterns[j])
 
+# Constructing the model and solving it
 m, xs = constructModel()
 obj, pairs = solveModel(m, xs)
 pairs.sort()
@@ -95,4 +97,5 @@ while True:
     if len(subtours) == 0:
         break
 
+# Extract results as a csv file
 writePairsSolution(pairs)
