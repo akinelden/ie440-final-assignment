@@ -54,7 +54,7 @@ def writePairsSolution(pairs, filename = 'solver_solution.csv'):
 
 # Data read operation
 tsp_patterns = []
-with open('IE440Final19ETSPData.txt', mode='r') as csv_file:
+with open('Data/IE440Final19ETSPData.txt', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     for row in csv_reader:
         tsp_patterns.append([float(row["x"]),float(row["y"])])
